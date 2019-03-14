@@ -12,3 +12,33 @@ to compare the differences between 2 files:
 comm -3 <(sort L2A_GIPP.xml) <(sort L2A_GIPP.xml.bak)
 
 https://stackoverflow.com/questions/4544709/compare-two-files-line-by-line-and-generate-the-difference-in-another-file
+
+aux_data should go in:
+
+root@710adcc58707:/Sen2Cor-02.05.05-Linux64/lib/python2.7/site-packages/sen2cor/aux_data#
+
+to-do:
+
+in dockerfile, wget 
+
+ftp://geo10.elie.ucl.ac.be/v207/ESACCI-LC-L4-ALL-FOR-SEN2COR.zip
+
+and then extract all contents (recrusive as there are .tar files within the .zip) to the aux_data folder.
+
+finally run and see if passes tests.
+
+discussion:
+https://forum.step.esa.int/t/sen2cor-standalone-2-5-and-cci-lc-integration/12698/2
+
+also consider switching to 'TOOLBOX' mode to see if other parsing error go away. if errors do not go away, see:
+https://forum.step.esa.int/t/sen2cor-2-5-5-no-such-file--pvi-jp2/9461/6
+
+also, here's an example for how 'find' works:
+
+find / -type d -name 'aux_data'
+
+/ = search enitre system (or for recursive search starting from within a directory use '.')
+d = directory
+name = directory name
+
+
