@@ -1,5 +1,9 @@
+#update config for default configuration w/o dem
 root@0d7379f5221c:~/sen2cor/2.5/cfg# sed -i.bak 's/<Nr_Processes>1/<Nr_Processes>AUTO/' /root/sen2cor/2.5/cfg/L2A_GIPP.xml
 (changes processes to auto and saves file. also saves a backup of the original as *.bak)
+
+#update config for dems
+root@47d7f79b26ad:~/sen2cor/2.5/cfg# sed -i.bak 's/<Nr_Processes>1/<Nr_Processes>AUTO/' /root/sen2cor/2.5/cfg/L2A_GIPP_with_dem.xml
 
 path in docker container = /root/sen2cor/2.5/cfg
 
