@@ -23,5 +23,7 @@ RUN apt-get update && apt-get install -y \
     sed 's:>NONE<:>dem<:' /root/sen2cor/2.5/cfg/L2A_GIPP_without_dem.xml >/root/sen2cor/2.5/cfg/L2A_GIPP_with_dem.xml && \
     curl -o /usr/local/bin/gosu -sSL "https://github.com/tianon/gosu/releases/download/${GOSU_VERSION}/gosu-amd64" && \
     chmod +x /usr/local/bin/gosu
+    # use all available cores. note this could cause memory issues -alando
+    sed -i.bak 's/<Nr_Processes>1/<Nr_Processes>AUTO/' /root/sen2cor/2.5/cfg/L2A_GIPP.xml
 ADD docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
