@@ -27,5 +27,12 @@ RUN apt-get update && apt-get install -y \
     sed -i.bak 's/<Nr_Processes>1/<Nr_Processes>AUTO/' /root/sen2cor/2.5/cfg/L2A_GIPP.xml && \
     # ('-d' arg configuration):
     sed -i.bak 's/<Nr_Processes>1/<Nr_Processes>AUTO/' /root/sen2cor/2.5/cfg/L2A_GIPP_with_dem.xml
+
+    # same config changes for operation mode 
+    # (default config)
+    sed -i.bak 's/<Operation_Mode>PDGS/<Operation_Mode>TOOLBOX/' /root/sen2cor/2.5/cfg/L2A_GIPP.xml
+    # ('-d' arg config)
+    sed -i.bak 's/<Operation_Mode>PDGS/<Operation_Mode>TOOLBOX/' /root/sen2cor/2.5/cfg/L2A_GIPP_with_dem.xml
+
 ADD docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
