@@ -41,4 +41,14 @@ find / -type d -name 'aux_data'
 d = directory
 name = directory name
 
+aux data repo:
+root@710adcc58707:/Sen2Cor-02.05.05-Linux64/lib/python2.7/site-packages/sen2cor/aux_data#
 
+notes on docker commands:
+"VOLUME (-v) is different from COPY and ADD because it creates a mountpiont that the host operating system can interact with." Basically a host directly and a directory within the container are synced so changes to either are reflected as a single unified state.
+
+"""COPY accomplishes everything that VOLUME accomplishes, but does it during build time. This is necessary for configuring containers with modified config files and services such as httpd, nginx, mongodb, etc.
+
+One setback to COPY is that it makes only the container that was copied to aware of the contents. Meaning we cannot access the contents on our host computer, or on other running docker containers, something VOLUME does."""
+
+"ADD is exactly the same as COPY except for one distinct difference. ADD can fetch content from a URL, and if the URL content is recognized as compresssed, will uncompress the contents. It has the same setbacks that COPY has."
