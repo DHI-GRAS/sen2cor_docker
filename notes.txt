@@ -52,3 +52,6 @@ notes on docker commands:
 One setback to COPY is that it makes only the container that was copied to aware of the contents. Meaning we cannot access the contents on our host computer, or on other running docker containers, something VOLUME does."""
 
 "ADD is exactly the same as COPY except for one distinct difference. ADD can fetch content from a URL, and if the URL content is recognized as compresssed, will uncompress the contents. It has the same setbacks that COPY has."
+
+continue here:
+https://aws.amazon.com/blogs/compute/creating-a-simple-fetch-and-run-aws-batch-job/
