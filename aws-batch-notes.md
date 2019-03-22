@@ -77,3 +77,35 @@ AWS Batch compute environments have their own AWS ECS-optimized AMI for compute 
 ## Job Queues
 
 "Jobs are submitted to a job queue, where they reside until they are able to be scheduled to run in a compute environment. An AWS account can have multiple job queues. For example, you might create a queue hat uses Amazon EC2 Spot Instances for low-priority jobs. Job queues have a priority that is used by the scheduler to determine which jobs in the which queue should be evaluated for execution first."
+
+
+## Configure Sen2Cor container to talk to S3
+
+Docker containers' storage driver API (https://docs.docker.com/registry/storage-drivers/) is versatile enough to cover both local filesystems as well as common key:value object store systems such as AWS S3 or GCP GCS. 
+
+
+
+## Question: How does a file from a batch job get copied from S3 to a machine's local disk?
+
+```
+docker run -it -v ~/radiant/sen2cor_test_data/aux_data:/Sen2Cor-02.05.05-Linux64/lib/python2.7/site-packages/sen2cor/aux_data -v ~/radiant/sen2cor_test_data/unzipped_scenes:/var/sentinel2_data/unzipped_scenes 939788573396.dkr.ecr.us-west-2.amazonaws.com/sen2cor
+```
+
+
+```
+/Sen2Cor-02.05.05-Linux64/bin/L2A_Process /var/sentinel2_data/unzipped_scenes/S2A_MSIL1C_20190122T075221_N0207_R135_T36NXF_20190122T091707.SAFE --resolution=10 --GIP_L2A /root/sen2cor/2.5/cfg/L2A_GIPP_with_dem.xml
+```
+
+
+NOTE: NEED TO MAKE SURE CAN RETRIEVE DEM FROM PUBLIC URL OTHERWISE NEED TO CONFIGURE GATEWAY OR PUT DEM IN S3
+
+
+to-do:
+
+- make sure batchit and aws cli are installed (and configured) on docker image. https://github.com/base2genomics/batchit
+- put correction data on efs/
+- configure above scripts to have product-ids as pass-ins
+- write container run script using batchit as an example (pull in container environmental vairables)
+
+test!
+
