@@ -109,3 +109,30 @@ to-do:
 
 test!
 
+Notes on 2 primary ways to mount EFS to an ECS container:
+
+- Docker Volumes
+	+ built-in local driver or a thrid-party volume driver can be used. if third-party driver is used, it should be installed on the container instance beffore task is launched. Docker volumes are managed by docker and a directory is created in `/var/lib/docker/volumes` on the container instance that contains the volume data.
+- Bind Mounts
+
+need to configure container instance AMI to mount the Amazon EFS file system *before* the Docker daemon starts. 
+
+Thus, will need to create custom ECS AMI. 
+
+In order to create AMI, first setup EC2 with ECS container and follow [tutorial details](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_container_instance.html) to mount EFS. Then, once you've verified that the running container has access to the mounted volumes, save AMI. Details on creating the actual compute resource AMI are [here](https://docs.aws.amazon.com/batch/latest/userguide/create-batch-ami.html).
+
+decided to use ami instead.
+```
+aws s3 ls s3://sentinel-s2-l1c/products/2019/1/22/S2A_MSIL1C_20190122T075221_N0207_R135_T36NXF_20190122T091707 --request-payer requester
+```
+lists the file.
+
+need to decide:
+
+1. should file be copied before docker daemon launch and then mounted or after launch? if before, docker run command is more similar to laptop
+2. think about what environmental variables can be set with batchit - are these set in the host instance or in the container?
+
+
+important:
+
+create new ecs spot configuration and autoscaling group with new ami!
